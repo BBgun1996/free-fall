@@ -7,11 +7,11 @@ SCREEN_HEIGHT = 900
 class GameWindow(arcade.Window):
     def __init__(self, width, height):
         super().__init__(width, height)
- 
- 
+
         self.world = World(width, height) 
         self.background_sprite = ModelSprite('images/background.png', model=self.world.background) 
-        self.basket_sprite = ModelSprite('images/basket.png', model=self.world.basket) 
+        self.basket_sprite = ModelSprite('images/basket.png', model=self.world.basket)
+        self.ball_sprite = ModelSprite('images/ball.png', model=self.world.ball)  
 
 
  
@@ -19,6 +19,7 @@ class GameWindow(arcade.Window):
         arcade.start_render()
         self.background_sprite.draw()
         self.basket_sprite.draw()
+        self.ball_sprite.draw()
 
 
         arcade.draw_text("level : " + str(self.world.level),
@@ -28,7 +29,8 @@ class GameWindow(arcade.Window):
                          20, self.height - 50,
                          arcade.color.BLACK, 12)
 
-
+    def animate(self, delta):
+        self.world.animate(delta)
 
     def on_key_press(self, key, key_modifiers):
         self.world.on_key_press(key, key_modifiers)
