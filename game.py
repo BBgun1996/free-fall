@@ -9,18 +9,16 @@ class GameWindow(arcade.Window):
         super().__init__(width, height)
 
         self.world = World(width, height) 
+
         self.background_sprite = ModelSprite('images/background.png', model=self.world.background) 
         self.basket_sprite = ModelSprite('images/basket.png', model=self.world.basket)
         self.ball_sprite = ModelSprite('images/ball.png', model=self.world.ball)  
 
-
- 
     def on_draw(self):
         arcade.start_render()
         self.background_sprite.draw()
         self.basket_sprite.draw()
         self.ball_sprite.draw()
-
 
         arcade.draw_text("level : " + str(self.world.level),
                          20, self.height - 30,

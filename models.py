@@ -16,7 +16,7 @@ class World:
         self.height = height
 
         self.background = Background(self, width/2, height/2)
-        self.basket = Basket(self, 450, 450)
+        self.basket = Basket(self, width/2, height/2)
         self.ball = Ball(self, 140, 619)
 
         self.level = 1
@@ -50,7 +50,6 @@ class World:
             self.ball.speed_x = randint(1, 120)
 
 class Ball(Model):
-
     def __init__(self, world, x, y):
         super().__init__(world, x, y)
         self.speed_x = 0
