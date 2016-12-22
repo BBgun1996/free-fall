@@ -14,9 +14,10 @@ class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
+        self.level = 1
         self.score = 0
         self.background = Background(self, 450, 450)
-        self.basket = Basket(self, 400, 400)
+        self.basket = Basket(self, 450, 450)
 
 
 
@@ -36,7 +37,7 @@ class Basket(Model):
 
     def random_location(self):
         self.x = randint(100, self.world.width - 1)
-        self.y = randint(50, self.world.height - 300)
+        self.y = randint(50, self.world.height - 400)
 
 class Background(Model):
     def __init__(self, world, x, y):

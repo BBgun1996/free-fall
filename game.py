@@ -21,10 +21,12 @@ class GameWindow(arcade.Window):
         self.basket_sprite.draw()
 
 
-
-        arcade.draw_text(str(self.world.score),
-                         self.width - 30, self.height - 30,
-                         arcade.color.WHITE, 20)
+        arcade.draw_text("level : " + str(self.world.level),
+                         20, self.height - 30,
+                         arcade.color.BLACK, 12)
+        arcade.draw_text("score : " + str(self.world.score),
+                         20, self.height - 50,
+                         arcade.color.BLACK, 12)
 
 
 
