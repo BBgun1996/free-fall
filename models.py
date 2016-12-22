@@ -74,7 +74,7 @@ class Basket(Model):
 
     def random_location(self):
         self.x = randint(150, self.world.width - 100)
-        self.y = randint(50, self.world.height - 400)
+        self.y = randint(250, self.world.height - 400)
 
     def animate(self, delta):
         if self.move_direction > 0:

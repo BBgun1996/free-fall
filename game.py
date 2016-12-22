@@ -30,12 +30,12 @@ class GameWindow(arcade.Window):
 
             arcade.draw_text("level : " + str(self.world.level),
                              20, self.height - 30,
-                             arcade.color.BLACK, 12)
+                             arcade.color.BLACK, 14)
             arcade.draw_text("life : " + str(self.world.life),
-                             20, self.height - 50,
+                             20, self.height - 60,
                              arcade.color.BLACK, 12)
             arcade.draw_text("ball : " + str(self.world.ball_in_basket),
-                             20, self.height - 70,
+                             20, self.height - 80,
                              arcade.color.BLACK, 12)
 
         if(self.screen_bg == GAMEOVER_SCREEN):
