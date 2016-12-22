@@ -6,6 +6,7 @@ SCREEN_HEIGHT = 900
 
 GAME_SCREEN = 0
 GAMEOVER_SCREEN = 1
+RESTART_SCREEN = 2
  
 class GameWindow(arcade.Window):
     def __init__(self, width, height):
@@ -46,6 +47,12 @@ class GameWindow(arcade.Window):
                              420, 350,
                              arcade.color.BLACK, 15)
 
+        if(self.screen_bg == RESTART_SCREEN):
+            self.world.level = 1
+            self.world.ball_in_basket = 0
+
+            self.screen_bg = GAME_SCREEN
+
     def animate(self, delta):
         self.world.animate(delta)
 
@@ -55,6 +62,12 @@ class GameWindow(arcade.Window):
 
     def on_key_press(self, key, key_modifiers):
         self.world.on_key_press(key, key_modifiers)
+
+        if key == arcade.key.ENTER:
+            if self.screen_bg == GAMEOVER_SCREEN:
+                self.world.life = 5
+                self.screen_bg = RESTART_SCREEN
+            
 
 class ModelSprite(arcade.Sprite):
     def __init__(self, *args, **kwargs):
