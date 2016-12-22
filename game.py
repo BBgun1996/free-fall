@@ -3,6 +3,9 @@ from models import World
  
 SCREEN_WIDTH = 900
 SCREEN_HEIGHT = 900
+
+GAME_SCREEN = 0
+GAMEOVER_SCREEN = 1
  
 class GameWindow(arcade.Window):
     def __init__(self, width, height):
@@ -10,28 +13,40 @@ class GameWindow(arcade.Window):
 
         self.world = World(width, height) 
 
-        self.background_sprite = ModelSprite('images/background.png', model=self.world.background) 
+        self.gamescreen_sprite = ModelSprite('images/background.png', model=self.world.background)
+        self.gameover_sprite = ModelSprite('images/background.png', model=self.world.background) 
         self.basket_sprite = ModelSprite('images/basket.png', model=self.world.basket)
-        self.ball_sprite = ModelSprite('images/ball.png', model=self.world.ball)  
+        self.ball_sprite = ModelSprite('images/ball.png', model=self.world.ball)
+
+        self.screen_bg = GAME_SCREEN
 
     def on_draw(self):
         arcade.start_render()
-        self.background_sprite.draw()
-        self.basket_sprite.draw()
-        self.ball_sprite.draw()
+        
+        if(self.screen_bg == GAME_SCREEN):
+            self.gamescreen_sprite.draw()
+            self.basket_sprite.draw()
+            self.ball_sprite.draw()
 
-        arcade.draw_text("level : " + str(self.world.level),
-                         20, self.height - 30,
-                         arcade.color.BLACK, 12)
-        arcade.draw_text("life : " + str(self.world.life),
-                         20, self.height - 50,
-                         arcade.color.BLACK, 12)
-        arcade.draw_text("ball : " + str(self.world.ball_in_basket),
-                         20, self.height - 70,
-                         arcade.color.BLACK, 12)
+            arcade.draw_text("level : " + str(self.world.level),
+                             20, self.height - 30,
+                             arcade.color.BLACK, 12)
+            arcade.draw_text("life : " + str(self.world.life),
+                             20, self.height - 50,
+                             arcade.color.BLACK, 12)
+            arcade.draw_text("ball : " + str(self.world.ball_in_basket),
+                             20, self.height - 70,
+                             arcade.color.BLACK, 12)
+
+        if(self.screen_bg == GAMEOVER_SCREEN):
+            self.gameover_sprite.draw()
 
     def animate(self, delta):
         self.world.animate(delta)
+
+        if self.world.life <= 0:
+            self.screen_bg = GAMEOVER_SCREEN
+            
 
     def on_key_press(self, key, key_modifiers):
         self.world.on_key_press(key, key_modifiers)
