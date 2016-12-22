@@ -49,7 +49,7 @@ class World:
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.SPACE:
             self.ball.speed_y = 1
-            self.ball.speed_x = randint(1, 120)
+            self.ball.speed_x = self.cursor.power
 
 class Ball(Model):
     def __init__(self, world, x, y):
