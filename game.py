@@ -25,7 +25,7 @@ class GameWindow(arcade.Window):
         arcade.draw_text("level : " + str(self.world.level),
                          20, self.height - 30,
                          arcade.color.BLACK, 12)
-        arcade.draw_text("score : " + str(self.world.score),
+        arcade.draw_text("ball : " + str(self.world.ball_in_basket),
                          20, self.height - 50,
                          arcade.color.BLACK, 12)
 

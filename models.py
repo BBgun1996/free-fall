@@ -15,7 +15,7 @@ class World:
         self.width = width
         self.height = height
         self.level = 1
-        self.score = 0
+        self.ball_in_basket = 0
         self.background = Background(self, width/2, height/2)
         self.basket = Basket(self, 450, 450)
         self.ball = Ball(self, 140, 619)
@@ -27,11 +27,19 @@ class World:
         if self.ball.y <= 0:
             self.ball.new_ball()
 
+        if self.ball.hit(self.basket, 50, 100):
+            self.ball_in_basket += 1
+
+        if self.level == self.ball_in_basket:
+            self.basket.random_location()
+            self.ball_in_basket = 0
+            self.level += 1
+
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.SPACE:
             self.ball.speed_y = 1
-            self.ball.speed_x = 50
+            self.ball.speed_x = randint(1, 120)
 
     
 
@@ -45,7 +53,7 @@ class Ball(Model):
     def animate(self, delta):
         self.x += self.speed_x
         self.y -= self.speed_y
-        self.speed_y *= 2
+        self.speed_y *= 1.5
 
     def new_ball(self):
         self.speed_y = 0
@@ -58,7 +66,7 @@ class Basket(Model):
         super().__init__(world, x, y)
 
     def random_location(self):
-        self.x = randint(100, self.world.width - 1)
+        self.x = randint(150, self.world.width - 100)
         self.y = randint(50, self.world.height - 400)
 
 class Background(Model):
