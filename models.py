@@ -14,11 +14,14 @@ class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.level = 1
-        self.ball_in_basket = 0
+
         self.background = Background(self, width/2, height/2)
         self.basket = Basket(self, 450, 450)
         self.ball = Ball(self, 140, 619)
+
+        self.level = 1
+        self.ball_in_basket = 0
+        self.life = 5
 
     def animate(self, delta):
         self.ball.animate(delta)
@@ -26,14 +29,17 @@ class World:
 
         if self.ball.y <= 0:
             self.ball.new_ball()
+            self.life -= 1
 
         if self.ball.hit(self.basket, 50, 100):
             self.ball_in_basket += 1
+            self.ball.new_ball()
 
         if self.level == self.ball_in_basket:
             self.basket.random_location()
             self.ball_in_basket = 0
             self.level += 1
+            self.life = 5
 
         if self.level >= 3:
             self.basket.speed = (self.level - 2)

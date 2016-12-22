@@ -25,8 +25,11 @@ class GameWindow(arcade.Window):
         arcade.draw_text("level : " + str(self.world.level),
                          20, self.height - 30,
                          arcade.color.BLACK, 12)
-        arcade.draw_text("ball : " + str(self.world.ball_in_basket),
+        arcade.draw_text("life : " + str(self.world.life),
                          20, self.height - 50,
+                         arcade.color.BLACK, 12)
+        arcade.draw_text("ball : " + str(self.world.ball_in_basket),
+                         20, self.height - 70,
                          arcade.color.BLACK, 12)
 
     def animate(self, delta):
