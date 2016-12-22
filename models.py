@@ -2,7 +2,7 @@ import arcade.key
 from random import randint
 
 class Model:
-    def __init__(self, world, x, y, angle):
+    def __init__(self, world, x, y):
         self.world = world
         self.x = x
         self.y = y
@@ -14,9 +14,9 @@ class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-
-
         self.score = 0
+        self.background = Background(self, 450, 450)
+        self.basket = Basket(self, 400, 400)
 
 
 
@@ -29,39 +29,17 @@ class World:
 
 
 
-class Ship(Model):
-    DIR_HORIZONTAL = 0
-    DIR_VERTICAL = 1
 
+class Basket(Model):
     def __init__(self, world, x, y):
-        super().__init__(world, x, y, 0)
-        self.direction = Ship.DIR_VERTICAL
-
-    def switch_direction(self):
-        if self.direction == Ship.DIR_HORIZONTAL:
-            self.direction = Ship.DIR_VERTICAL
-            self.angle = 0
-        else:
-            self.direction = Ship.DIR_HORIZONTAL
-            self.angle = -90
-
-    def animate(self, delta):
-        if self.direction == Ship.DIR_VERTICAL:
-            if self.y > self.world.height:
-                self.y = 0
-            self.y += 5
-        else:
-            if self.x > self.world.width:
-                self.x = 0
-            self.x += 5
-
-
-class Gold(Model):
-    def __init__(self, world, x, y):
-        super().__init__(world, x, y, 0)
+        super().__init__(world, x, y)
 
     def random_location(self):
-        self.x = randint(0, self.world.width - 1)
-        self.y = randint(0, self.world.height - 1)
+        self.x = randint(100, self.world.width - 1)
+        self.y = randint(50, self.world.height - 300)
+
+class Background(Model):
+    def __init__(self, world, x, y):
+        super().__init__(world, x, y)
 
 
