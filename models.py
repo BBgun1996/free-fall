@@ -18,6 +18,7 @@ class World:
         self.background = Background(self, width/2, height/2)
         self.basket = Basket(self, width/2, height/2)
         self.ball = Ball(self, 140, 619)
+        self.cursor = Cursor(self, 210 , 50)
 
         self.level = 1
         self.ball_in_basket = 0
@@ -26,6 +27,7 @@ class World:
     def animate(self, delta):
         self.ball.animate(delta)
         self.basket.animate(delta)
+        self.cursor.animate(delta)
 
         if self.ball.y <= 0:
             self.ball.new_ball()
@@ -85,6 +87,23 @@ class Basket(Model):
                 self.move_direction = 1
 
         self.x += (self.speed * self.move_direction)
+
+class Cursor(Model):
+    def __init__(self, world, x, y):
+        super().__init__(world, x, y)
+        self.power = 0
+        self.move_direction = 1
+
+    def animate(self, delta):
+        if self.move_direction > 0:
+            if self.power == 120:
+                self.move_direction = -1
+        else:
+            if self.power == 0:
+                self.move_direction = 1
+
+        self.power += self.move_direction
+        self.x = 210 + (4 * self.power)        
 
 class Background(Model):
     def __init__(self, world, x, y):

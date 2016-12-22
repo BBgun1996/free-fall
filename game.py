@@ -13,10 +13,11 @@ class GameWindow(arcade.Window):
 
         self.world = World(width, height) 
 
-        self.gamescreen_sprite = ModelSprite('images/background.png', model=self.world.background)
-        self.gameover_sprite = ModelSprite('images/background.png', model=self.world.background) 
+        self.gamescreen_sprite = ModelSprite('images/gamescreen.png', model=self.world.background)
+        self.gameover_sprite = ModelSprite('images/gameover.png', model=self.world.background) 
         self.basket_sprite = ModelSprite('images/basket.png', model=self.world.basket)
         self.ball_sprite = ModelSprite('images/ball.png', model=self.world.ball)
+        self.cursor_sprite = ModelSprite('images/cursor.png', model=self.world.cursor)
 
         self.screen_bg = GAME_SCREEN
 
@@ -27,6 +28,7 @@ class GameWindow(arcade.Window):
             self.gamescreen_sprite.draw()
             self.basket_sprite.draw()
             self.ball_sprite.draw()
+            self.cursor_sprite.draw()
 
             arcade.draw_text("level : " + str(self.world.level),
                              20, self.height - 30,
@@ -40,6 +42,9 @@ class GameWindow(arcade.Window):
 
         if(self.screen_bg == GAMEOVER_SCREEN):
             self.gameover_sprite.draw()
+            arcade.draw_text("level " + str(self.world.level),
+                             420, 350,
+                             arcade.color.BLACK, 15)
 
     def animate(self, delta):
         self.world.animate(delta)
