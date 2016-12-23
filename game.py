@@ -47,6 +47,10 @@ class GameWindow(arcade.Window):
                              420, 350,
                              arcade.color.BLACK, 15)
 
+            arcade.draw_text("....PRASS ENTER TO RESTART GAME....",
+                             20, 20,
+                             arcade.color.BLACK, 12)         
+
         if(self.screen_bg == RESTART_SCREEN):
             self.world.level = 1
             self.world.ball_in_basket = 0
