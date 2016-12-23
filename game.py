@@ -25,8 +25,9 @@ class GameWindow(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         
-        if(self.screen_bg == GAME_SCREEN):
+        if self.screen_bg == GAME_SCREEN:
             self.gamescreen_sprite.draw()
+
             self.basket_sprite.draw()
             self.ball_sprite.draw()
             self.cursor_sprite.draw()
@@ -41,17 +42,18 @@ class GameWindow(arcade.Window):
                              20, self.height - 80,
                              arcade.color.BLACK, 12)
 
-        if(self.screen_bg == GAMEOVER_SCREEN):
+        if self.screen_bg == GAMEOVER_SCREEN:
             self.gameover_sprite.draw()
+
             arcade.draw_text("level " + str(self.world.level),
                              420, 350,
                              arcade.color.BLACK, 15)
 
-            arcade.draw_text("....PRASS ENTER TO RESTART GAME....",
+            arcade.draw_text(". . . . PRASS ENTER TO RESTART GAME . . . .",
                              20, 20,
-                             arcade.color.BLACK, 12)         
+                             arcade.color.WHITE, 12)         
 
-        if(self.screen_bg == RESTART_SCREEN):
+        if self.screen_bg == RESTART_SCREEN:
             self.world.level = 1
             self.world.ball_in_basket = 0
 
