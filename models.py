@@ -43,8 +43,8 @@ class World:
             self.level += 1
             self.life = 5
 
-        if self.level >= 3:
-            self.basket.speed = (self.level - 2)
+        if (self.level % 3) == 0:
+            self.basket.speed = (self.level/3)
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.SPACE:
@@ -87,6 +87,9 @@ class Basket(Model):
                 self.move_direction = 1
 
         self.x += (self.speed * self.move_direction)
+
+        if self.speed > 10:
+            self.speed = 10
 
 class Cursor(Model):
     def __init__(self, world, x, y):
