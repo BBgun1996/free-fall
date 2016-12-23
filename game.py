@@ -56,6 +56,7 @@ class GameWindow(arcade.Window):
         if self.screen_bg == RESTART_SCREEN:
             self.world.level = 1
             self.world.ball_in_basket = 0
+            self.world.basket.speed = 0
 
             self.screen_bg = GAME_SCREEN
 
